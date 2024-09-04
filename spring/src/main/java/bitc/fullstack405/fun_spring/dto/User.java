@@ -27,4 +27,6 @@ public class User {
     @Column
     private String adress; // 주소
 
+    @Column
+    private char getDeletedYn = 'N';
 }

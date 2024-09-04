@@ -24,8 +24,9 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public User isUserInfo(String userId, String userPw) {
-        return null;
+    public Boolean isUserInfo(String userId, String userPw) {
+        // 사용자가 있을 경우 true 를 반환하는 로직
+        return false;
     }
 
     @Override

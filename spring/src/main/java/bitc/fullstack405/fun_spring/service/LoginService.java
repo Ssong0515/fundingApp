@@ -8,7 +8,9 @@ public interface LoginService {
 
     User saveUser(User user);
 
-    User isUserInfo(String userId, String userPw);
+    Boolean isUserInfo(String userId, String userPw);
 
     User findUserIdForProfile(String userId);
+
+    Boolean UserFindById(User user);
 }
