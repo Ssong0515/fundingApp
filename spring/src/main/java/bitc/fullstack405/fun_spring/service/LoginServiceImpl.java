@@ -26,11 +26,35 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public Boolean isUserInfo(String userId, String userPw) {
         // 사용자가 있을 경우 true 를 반환하는 로직
-        return false;
+        return loginRepository.findByUserIdAndUserPw(userId, userPw) != null;
+    }
+
+    // 로그아웃
+    @Override
+    public User logOutByUser(User user) {
+        return loginRepository.logOutByUser(user);
+    }
+
+    // 비밀번호 변경
+    @Override
+    public Boolean saveUser(String userId, String userPw) {
+        return loginRepository.saveUser(userId, userPw);
     }
 
     @Override
     public User findUserIdForProfile(String userId) {
-        return null;
+        return loginRepository.findUserIdForProfile(userId);
+    }
+
+    // 회원가입
+    @Override
+    public Boolean UserFindById(User user) {
+        return loginRepository.UserFindById(user);
+    }
+
+    // 회원탈퇴
+    @Override
+    public User deleteByUser(String userId, String userPw) {
+        return loginRepository.deleteByUser(userId, userPw);
     }
 }

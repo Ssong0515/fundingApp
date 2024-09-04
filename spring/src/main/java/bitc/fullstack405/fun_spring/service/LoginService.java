@@ -13,4 +13,10 @@ public interface LoginService {
     User findUserIdForProfile(String userId);
 
     Boolean UserFindById(User user);
+
+    User deleteByUser(String userId, String userPw);
+
+    User logOutByUser(User user);
+
+    Boolean saveUser(String userId, String userPw);
 }

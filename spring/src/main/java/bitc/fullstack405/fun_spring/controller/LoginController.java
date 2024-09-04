@@ -4,7 +4,7 @@ import bitc.fullstack405.fun_spring.dto.User;
 import bitc.fullstack405.fun_spring.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-@RestController
+@RestController("/")
 public class LoginController {
 
     @Autowired
@@ -12,7 +12,7 @@ public class LoginController {
 
     //  로그인 프로세스
     @PostMapping("/login")
-    public Object loginProcess(@RequestParam(name = "userId") String userId, @RequestParam(name = "userPw") String userPw) throws Exception {
+    public Object loginProcess(@RequestBody String userId, @RequestBody String userPw) throws Exception {
         Boolean result = loginService.isUserInfo(userId, userPw);
         User user = null;
 
@@ -20,45 +20,72 @@ public class LoginController {
             user = loginService.findUserIdForProfile(userId);
         }
         if (user != null) {
-            return "Login Successful";
+            return true;
         }
         else {
-            return "Login Fail";
+            return false;
         }
         //  return loginService.findUserByUserIdAndPw(userId, userPw);
     }
 
-//    //  로그아웃 프로세스
-//    @RequestMapping("/logout")
-//    public Object logout() throws Exception {
-//
-//    }
+    //  로그아웃 프로세스
+    @PostMapping("/logout")
+    public Object logOutProcess(@RequestBody User user) throws Exception {
+        loginService.logOutByUser(user);
+//        System.out.println("로그아웃하시겠습니까?");
+//        Object obj = new Object();
+//        ? = "redirect:/login";
+
+//        return obj;
+
+        return "redirect:/login";
+    }
 
         //  화원가입 프로세스
         @PostMapping("/signIn")
-        public Object signInProcess (@RequestParam(name = "user") User user) throws Exception {
-        Boolean result = loginService.UserFindById(user);
-                user = null;
+        public Object signInProcess (@RequestBody User user) throws Exception {
+            // DB에 받은 userId를 가진 user가 있는지 확인
+            Boolean result = loginService.UserFindById(user);
 
-        if (user != null && result) {
-            return "Sign Up Successful";
+        /*
+        user
+        중복 -> user != null
+        중복 x -> user == null
+
+        null == false
+
+         */
+
+            // 중복 o
+            if (result == true) {
+                return "Already existed ID";
+            }
+            // 중복 x
+            else {
+                loginService.saveUser(user);
+                return "Sign Up Successful";
+            }
+        }
+
+//      비밀번호 변경 프로세스
+    @PutMapping("/changePassword")
+    public Object changePassword(@RequestBody String userId, @RequestBody String userPw) throws Exception {
+        Boolean result =  loginService.saveUser(userId, userPw);
+
+        if (result == true) {
+            return "Change Password Fail";
         }
         else {
-            return "Sign Up Fail";
+            loginService.saveUser(userId, userPw);
+            return "Change Password Successful";
         }
-//       return loginService.saveUser(user);
-        }
-
-//    //  비밀번호 변경 프로세스
-//    @PutMapping("/changePassword")
-//    public Object changePassword(@RequestParam("userId") String userId, @RequestParam("userPw") String userPw, @RequestParam("userPwChk") String userPwChk) throws Exception {
-//
-//    }
+    }
 
     // 회원 탈퇴 프로세스
     @DeleteMapping("/signOut")
-    public Object signOutProcess (@RequestParam(name = "userId") String userId, @RequestParam(name = "userPw") String userPw) throws Exception {
-        return null;
-    }
-    }
+    public Object signOutProcess (@RequestBody String userId, @RequestBody String userPw) throws Exception {
+        loginService.deleteByUser(userId, userPw);
 
+        return "redirect:/login";
+    }
+}
