@@ -1,23 +1,14 @@
 package bitc.fullstack405.fun_spring.service;
 
-import bitc.fullstack405.fun_spring.dto.Login;
+
+import bitc.fullstack405.fun_spring.dto.User;
 
 public interface LoginService {
-    int isUserInfo(String userId, String userPw);
+    User findUserByUserIdAndPw(String userId, String userPw);
 
-    Login findUserIdForProfile(String userId);
+    User saveUser(User user);
 
-    Login findByUserIdCheckSignOut(String userId);
+    User isUserInfo(String userId, String userPw);
 
-    int userIdCheck(String userId);
-
-    int userEmailCheck(String email);
-
-    void insertUser(Login log);
-
-    Object getUserPw(); // xxx
-
-    void updateUserPw(String userId, String userPw);
-
-    Login findUserId(String email, String userPw);
+    User findUserIdForProfile(String userId);
 }

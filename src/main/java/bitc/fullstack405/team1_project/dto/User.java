@@ -1,17 +1,22 @@
-package bitc.fullstack405.fun_spring.dto;
+package bitc.fullstack405.team1_project.dto;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity
-public class Login {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
     private String userId;
+
+    @Column
     private String userPw;
-    private String email;
+
+    @Column
+    private String userEmail;
 }
