@@ -1,6 +1,5 @@
 package bitc.fullstack405.fun_spring.service;
 
-
 import bitc.fullstack405.fun_spring.dto.User;
 import bitc.fullstack405.fun_spring.repository.LoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +38,12 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public Boolean saveUser(String userId, String userPw) {
         return loginRepository.saveUser(userId, userPw);
+    }
+
+    // ex
+    @Override
+    public void execute(User user) {
+
     }
 
     @Override

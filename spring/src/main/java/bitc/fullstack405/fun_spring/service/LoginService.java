@@ -1,6 +1,5 @@
 package bitc.fullstack405.fun_spring.service;
 
-
 import bitc.fullstack405.fun_spring.dto.User;
 
 public interface LoginService {
@@ -19,4 +18,6 @@ public interface LoginService {
     User logOutByUser(User user);
 
     Boolean saveUser(String userId, String userPw);
+
+    void execute(User user);
 }

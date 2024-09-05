@@ -25,8 +25,11 @@ public class User {
     private String userName; // 이름
 
     @Column
-    private String adress; // 주소
+    private String address; // 주소
 
     @Column
     private char getDeletedYn = 'N';
+
+    public void addAttribute(String id, String id1) {
+    }
 }
