@@ -1,23 +1,29 @@
 package bitc.fullstack405.fun_spring.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
+@Table(name = "favorite")
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
-@EqualsAndHashCode
 public class FavoriteEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "favorite_id")
     private int favoriteId; // pk
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id") // fk
-//    private UserEntity userEntity;
-//
-//    // 외래키
-//    @JoinColumn(name = "project_id") // fk
-//    private ProjectEntity projectEntity;
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    @ToString.Exclude
+    private UserEntity user; // fk
+
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "project_id", nullable = false)
+    @ToString.Exclude
+    private ProjectEntity project; // fk
 }

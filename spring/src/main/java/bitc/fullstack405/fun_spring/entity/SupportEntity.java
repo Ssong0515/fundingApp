@@ -1,14 +1,15 @@
 package bitc.fullstack405.fun_spring.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
+@Table(name = "support")
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
-@EqualsAndHashCode
 public class SupportEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "support_id")
@@ -17,11 +18,15 @@ public class SupportEntity {
     @Column(nullable = false)
     private int amount; // 후원 금액
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id") // fk
-//    private UserEntity userEntity;
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    @ToString.Exclude
+    private UserEntity user; // fk
 
-    // 외래키
-//    @JoinColumn(name = "project_id") // fk
-//    private ProjectEntity projectEntity;
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "project_id", nullable = false)
+    @ToString.Exclude
+    private ProjectEntity project; // fk
 }

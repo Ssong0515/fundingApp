@@ -1,23 +1,25 @@
 package bitc.fullstack405.fun_spring.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Table(name = "project")
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
-@EqualsAndHashCode
 public class ProjectEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "project_id")
-    private int projectId; // 프로젝트 pk
+    private int projectId; // pk
 
     @Column(name = "goal_amount", nullable = false)
     private int goalAmount; // 목표 금액
@@ -44,9 +46,19 @@ public class ProjectEntity {
     @Column(name = "per_price", nullable = false)
     private int perPrice; // 개당 금액
 
-    // fk
-//    @ManyToOne
-//    @JoinColumn(name = "user_id") // 외래키 컬럼 이름
-//    @ToString.Exclude
-//    private UserEntity userEntity;
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    @ToString.Exclude
+    private UserEntity user; // fk
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<SupportEntity> supportList = new ArrayList<>();
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<FavoriteEntity> favoriteList = new ArrayList<>();
 }

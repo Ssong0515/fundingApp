@@ -1,5 +1,6 @@
 package bitc.fullstack405.fun_spring.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -7,15 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table
+@Table(name = "user")
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
-@EqualsAndHashCode //equals, hashCode 자동 생성
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private int userId; // 회원 pk
+    private int userId; // pk
 
     @Column(name = "user_pw", length = 45, nullable = false)
     private String userPw; // 비밀번호
@@ -29,9 +30,18 @@ public class UserEntity {
     @Column(length = 300, nullable = false)
     private String address; // 주소
 
-    // 양방향일 경우 @ToString.Exclude 양쪽 다 꼭 넣기
-    // user 부분은 다 cascade = CascadeType.ALL 이거 넣기(회원 수정되면 다른 거도 수정되어야 하니까)
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-//    @ToString.Exclude
-//    private List<ProjectEntity> projectEntityList = new ArrayList<>();
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<ProjectEntity> projectList = new ArrayList<>();
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<SupportEntity> supportList = new ArrayList<>();
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<FavoriteEntity> favoriteList = new ArrayList<>();
 }
