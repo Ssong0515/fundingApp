@@ -11,7 +11,8 @@ public interface ProjectRepository extends JpaRepository<ProjectEntity, Integer>
     //save
     //delete
 
-    int findByProjectId(int projectId);
+    ProjectEntity findByProjectId(int projectId);
 
-    List<ProjectEntity> findByAllProject(String project);
+    List<ProjectEntity> findAllByTitleStartingWith(String key);
+
 }

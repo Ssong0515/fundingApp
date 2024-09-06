@@ -5,6 +5,7 @@ import bitc.fullstack405.fun_spring.entity.UserEntity;
 import bitc.fullstack405.fun_spring.service.ProjectService;
 import bitc.fullstack405.fun_spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.projection.EntityProjection;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,10 +21,10 @@ public class ProjectController {
 
     // 상세보기
     @GetMapping("/project/{projectId}")
-    public Object getProjectDetail(@PathVariable(name = "projectId") int projectId) {
-        projectId = projectService.getProjectDetail(projectId);
+    public ProjectEntity getProjectDetail(@PathVariable(name = "projectId") int projectId) {
+        ProjectEntity project = projectService.getProjectDetail(projectId);
 
-        return projectId;
+        return project;
     }
 
     // 리스트

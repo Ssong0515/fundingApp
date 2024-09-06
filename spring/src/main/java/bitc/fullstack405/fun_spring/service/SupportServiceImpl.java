@@ -5,6 +5,8 @@ import bitc.fullstack405.fun_spring.repository.SupportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SupportServiceImpl implements SupportService {
 
@@ -14,24 +16,24 @@ public class SupportServiceImpl implements SupportService {
     @Override
     public int getSupportUserCount(int projectId) {
 
-        return supportRepository.supportUserCount(projectId);
+        return supportRepository.countByProject_ProjectId(projectId);
     }
 
     @Override
-    public int getSupportingProject(int userId) {
+    public List<SupportEntity> getSupportingListByProject(String userId) {
 
-        return supportRepository.getSupportingProject(userId);
+        return supportRepository.findAllByUserId(userId);
     }
 
     @Override
     public void createSupport(SupportEntity support) {
 
-        supportRepository.createSupport(support);
+        supportRepository.save(support);
     }
 
     @Override
-    public void getSupportDelete(SupportEntity support) {
+    public void getSupportDelete(int projectId, String userId) {
 
-        supportRepository.getSupportDelete(support);
+        supportRepository.deleteByProject_ProjectIdAndUser_UserId(projectId, userId);
     }
 }

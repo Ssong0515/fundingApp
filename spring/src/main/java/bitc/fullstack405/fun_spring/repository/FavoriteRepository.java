@@ -3,14 +3,13 @@ package bitc.fullstack405.fun_spring.repository;
 import bitc.fullstack405.fun_spring.entity.FavoriteEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface FavoriteRepository extends JpaRepository<FavoriteEntity, Integer> {
 
+    void deleteByProject_ProjectIdAndUser_UserId(int projectId, String userId);
 
-    void deleteFavorite(FavoriteEntity favorite);
+    int countByProject_ProjectId(int projectId);
 
-    void createFavorite(FavoriteEntity favorite);
-
-    int getFavoriteProject(int userId);
-
-    int findByFavoriteUserCount(int projectId);
+    List<FavoriteEntity> findAllByUser_UserId(String userId);
 }

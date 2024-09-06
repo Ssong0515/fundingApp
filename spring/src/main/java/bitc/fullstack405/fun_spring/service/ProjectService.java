@@ -5,7 +5,7 @@ import bitc.fullstack405.fun_spring.entity.ProjectEntity;
 import java.util.List;
 
 public interface ProjectService {
-    int getProjectDetail(int project);
+    ProjectEntity getProjectDetail(int project);
 
     List<ProjectEntity> getProjectList();
 
@@ -14,4 +14,7 @@ public interface ProjectService {
     List<ProjectEntity> getProjectListSearch(String project);
 
     void getWriteProject(ProjectEntity project);
+
+
+    void updateProject(ProjectEntity project);
 }

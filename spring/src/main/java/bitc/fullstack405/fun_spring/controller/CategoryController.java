@@ -1,5 +1,6 @@
 package bitc.fullstack405.fun_spring.controller;
 
+import bitc.fullstack405.fun_spring.entity.CategoryEntity;
 import bitc.fullstack405.fun_spring.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +15,8 @@ public class CategoryController {
 
     @GetMapping("category/{categoryId}")
     public Object getCategory(@PathVariable(name = "categoryId") int categoryId) {
-        categoryId = categoryService.getCategory(categoryId);
+        CategoryEntity category = categoryService.getCategory(categoryId);
 
-        return categoryId;
+        return category;
     }
 }

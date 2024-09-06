@@ -2,6 +2,7 @@ package bitc.fullstack405.fun_spring.service;
 
 import bitc.fullstack405.fun_spring.entity.ProjectEntity;
 import bitc.fullstack405.fun_spring.repository.ProjectRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     // 상세보기
     @Override
-    public int getProjectDetail(int projectId) {
+    public ProjectEntity getProjectDetail(int projectId) {
 
         return projectRepository.findByProjectId(projectId);
     }
@@ -36,15 +37,24 @@ public class ProjectServiceImpl implements ProjectService {
 
     // 검색    (  임시로 만듦  )
     @Override
-    public List<ProjectEntity> getProjectListSearch(String project) {
+    public List<ProjectEntity> getProjectListSearch(String key) {
 
-        return projectRepository.findByAllProject(project);
+        return projectRepository.findAllByTitleStartingWith(key);
     }
 
     // 작성
     @Override
     public void getWriteProject(ProjectEntity project) {
 
+        projectRepository.save(project);
+    }
+
+
+//    @Transactional
+    @Override
+    public void updateProject(ProjectEntity project) {
+//        ProjectEntity p = projectRepository.findByProjectId(project.getProjectId());
+//        p.setCurrentAmount(project.getCurrentAmount());
         projectRepository.save(project);
     }
 }
