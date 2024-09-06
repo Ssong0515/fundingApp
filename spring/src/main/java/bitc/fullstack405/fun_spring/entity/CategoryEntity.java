@@ -26,7 +26,7 @@ public class CategoryEntity {
     @Column(length = 30, nullable = false)
     private String title; // 카테고리
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "category")
     @ToString.Exclude
     private List<ProjectEntity> projectList = new ArrayList<>();
 }
