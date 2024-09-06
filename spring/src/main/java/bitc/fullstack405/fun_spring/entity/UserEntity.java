@@ -16,9 +16,8 @@ import java.util.List;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userId")
 public class UserEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private int userId; // pk
+    @Column(name = "user_id", nullable = false)
+    private String userId; // pk
 
     @Column(name = "user_pw", length = 45, nullable = false)
     private String userPw; // 비밀번호
