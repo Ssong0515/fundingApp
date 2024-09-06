@@ -40,11 +40,11 @@ public class LoginServiceImpl implements LoginService {
         return loginRepository.saveUser(userId, userPw);
     }
 
-    // ex
-    @Override
-    public void execute(User user) {
-
-    }
+//     ex
+//    @Override
+//    public void execute(User user) {
+//
+//    }
 
     @Override
     public User findUserIdForProfile(String userId) {

@@ -30,6 +30,6 @@ public class User {
     @Column
     private char getDeletedYn = 'N';
 
-    public void addAttribute(String id, String id1) {
-    }
+//    public void addAttribute(String id, String id1) {
+//    }
 }

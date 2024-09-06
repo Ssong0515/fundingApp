@@ -19,5 +19,5 @@ public interface LoginService {
 
     Boolean saveUser(String userId, String userPw);
 
-    void execute(User user);
+//    void execute(User user);
 }

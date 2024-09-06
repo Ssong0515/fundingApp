@@ -24,10 +24,10 @@ public class LoginController {
             user = loginService.findUserIdForProfile(userId);
         }
         if (user != null) {
-            return true;
+            return "로그인에 실패하였습니다.";
         }
         else {
-            return false;
+            return "로그인 되었습니다.";
         }
         //  return loginService.findUserByUserIdAndPw(userId, userPw);
     }
@@ -42,7 +42,7 @@ public class LoginController {
 
 //        return obj;
 
-        return "logout successful";
+        return "로그아웃 되었습니다.";
     }
 
 // 화원가입 프로세스
@@ -51,22 +51,14 @@ public class LoginController {
         // DB에 받은 userId를 가진 user가 있는지 확인
         Boolean result = loginService.UserFindById(user);
 
-        /*
-        user
-        중복 -> user != null
-        중복 x -> user == null
-
-        null == false
-         */
-
         // 중복 o
         if (result == true) {
-            return "Already existed ID";
+            return "이미 존재하는 아이디입니다.";
         }
         // 중복 x
         else {
             loginService.saveUser(user);
-            return "Sign Up Successful";
+            return "회원가입에 성공하였습니다.";
         }
     }
 
@@ -76,11 +68,11 @@ public class LoginController {
         Boolean result =  loginService.saveUser(userId, userPw);
 
         if (result == true) {
-            return "Change Password Fail";
+            return "비밀번호 변경에 실패하였습니다.";
         }
         else {
             loginService.saveUser(userId, userPw);
-            return "Change Password Successful";
+            return "비밀번호가 변경되었습니다.";
         }
     }
 
