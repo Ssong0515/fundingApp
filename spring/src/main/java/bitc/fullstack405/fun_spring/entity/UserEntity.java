@@ -1,6 +1,7 @@
 package bitc.fullstack405.fun_spring.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userId")
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,20 +29,17 @@ public class UserEntity {
     @Column(length = 45, nullable = false, unique = true)
     private String email; // 이메일
 
-    @Column(length = 300, nullable = false)
+    @Column(length = 500, nullable = false)
     private String address; // 주소
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<ProjectEntity> projectList = new ArrayList<>();
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<SupportEntity> supportList = new ArrayList<>();
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<FavoriteEntity> favoriteList = new ArrayList<>();
