@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface SupportRepository extends JpaRepository<SupportEntity, Integer> {
 
-    List<SupportEntity> findAllByUserId(String userId);
+    List<SupportEntity> findAllByUser_UserId(String userId);
 
     void deleteByProject_ProjectIdAndUser_UserId(int projectId, String userId);
 

@@ -22,7 +22,8 @@ public class ProjectController {
     // 상세보기
     @GetMapping("/project/{projectId}")
     public ProjectEntity getProjectDetail(@PathVariable(name = "projectId") int projectId) {
-        ProjectEntity project = projectService.getProjectDetail(projectId);
+        ProjectEntity project;
+        project = projectService.getProjectDetail(projectId);
 
         return project;
     }

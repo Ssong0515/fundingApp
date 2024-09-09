@@ -15,7 +15,8 @@ public class CategoryController {
 
     @GetMapping("category/{categoryId}")
     public Object getCategory(@PathVariable(name = "categoryId") int categoryId) {
-        CategoryEntity category = categoryService.getCategory(categoryId);
+        CategoryEntity category;
+        category = categoryService.getCategory(categoryId);
 
         return category;
     }

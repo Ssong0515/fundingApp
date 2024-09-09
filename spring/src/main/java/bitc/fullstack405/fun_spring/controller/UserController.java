@@ -47,9 +47,10 @@ public class UserController {
     }
 
 // 회원 상세보기
-    @GetMapping("/user/{UserId}")
+    @GetMapping("/user/{userId}")
     public UserEntity UserDetail(@PathVariable(name = "userId") String userId ) throws Exception {
-        UserEntity user = userService.findByUserId(userId);
+        UserEntity user;
+        user = userService.findByUserId(userId);
 
         return user;
     }

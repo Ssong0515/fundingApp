@@ -22,7 +22,7 @@ public class SupportServiceImpl implements SupportService {
     @Override
     public List<SupportEntity> getSupportingListByProject(String userId) {
 
-        return supportRepository.findAllByUserId(userId);
+        return supportRepository.findAllByUser_UserId(userId);
     }
 
     @Override
