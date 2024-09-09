@@ -15,4 +15,5 @@ public interface ProjectRepository extends JpaRepository<ProjectEntity, Integer>
 
     List<ProjectEntity> findAllByTitleStartingWith(String key);
 
+    void uploadFile(ProjectEntity project);
 }

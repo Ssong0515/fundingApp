@@ -15,6 +15,5 @@ public interface ProjectService {
 
     void getWriteProject(ProjectEntity project);
 
-
     void updateProject(ProjectEntity project);
 }

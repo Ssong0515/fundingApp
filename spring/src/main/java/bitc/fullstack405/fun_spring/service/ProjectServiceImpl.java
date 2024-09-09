@@ -2,7 +2,6 @@ package bitc.fullstack405.fun_spring.service;
 
 import bitc.fullstack405.fun_spring.entity.ProjectEntity;
 import bitc.fullstack405.fun_spring.repository.ProjectRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +12,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
     private ProjectRepository projectRepository;
+
+//    @Autowired
+//    private FileUtil fileUtil;
 
     // 상세보기
     @Override
@@ -46,7 +48,19 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void getWriteProject(ProjectEntity project) {
 
+//        String imgName = project.getImageName();
+//        if (imgName == null || imgName.isEmpty()) {
+//            imgName = "image_" + project.getProjectId();
+//            project.setImageName(imgName);
+//            projectRepository.save(project);
+//        }
+//        else {
+//            fileUtil.deleteFile(imgName);
+//        }
+
+        projectRepository.uploadFile(project);
         projectRepository.save(project);
+
     }
 
 
