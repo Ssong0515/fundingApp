@@ -10,7 +10,7 @@ import java.util.List;
 @Component
 public class ImageURL {
 
-    @Value("${image-base-url}")
+    @Value("http://10.100.105.168:8080/")
     private String baseUrl;
 
     public ArrayList<String> bannerImages() {

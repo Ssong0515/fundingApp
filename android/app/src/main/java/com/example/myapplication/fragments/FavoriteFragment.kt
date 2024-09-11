@@ -69,24 +69,15 @@ class FavoriteFragment : Fragment() {
                         binding.recyclerView.visibility = View.GONE
                         binding.frameLayout.visibility = View.VISIBLE
                     } else {
-                        Log.d("FavoriteFragment", "${response.body()}")
-
-
                         // 프로젝트 목록이 있으면 리사이클러뷰 보여줌
                         binding.recyclerView.visibility = View.VISIBLE
                         binding.frameLayout.visibility = View.GONE
                         val favoriteProjects = response.body() as MutableList<ProjectDetail>
 
-                        Log.d("FavoriteFragment", "어댑터 설정")
                         val adapter = FavoriteAdapter(favoriteProjects)
                         binding.recyclerView.adapter = adapter
                         binding.recyclerView.layoutManager = LinearLayoutManager(context)
                         adapter.notifyDataSetChanged()
-
-                        // 어댑터 설정
-//                        Log.d("FavoriteFragment", "어댑터 설정")
-//                        binding.recyclerView.adapter = FavoriteAdapter(favoriteProjects)
-//                        binding.recyclerView.layoutManager = LinearLayoutManager(context)
                     }
                 }
 
