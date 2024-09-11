@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.R
 import com.example.myapplication.Retrofit.FunClient
 import com.example.myapplication.activity.DetailActivity
 import com.example.myapplication.databinding.ItemCategoryDetailBinding
@@ -12,6 +13,8 @@ import com.squareup.picasso.Picasso
 
 class AdapterForCategoryDetail(var projectList: MutableList<ProjectDetail>): RecyclerView.Adapter<AdapterForCategoryDetail.Holder>() {
     class Holder(val binding: ItemCategoryDetailBinding): RecyclerView.ViewHolder(binding.root)
+
+    var favoriteList:MutableList<Int>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         return Holder(ItemCategoryDetailBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -29,6 +32,11 @@ class AdapterForCategoryDetail(var projectList: MutableList<ProjectDetail>): Rec
             textViewTotal.text = project.percent()
             progressBar.progress = project.progress()
             textViewDeadline.text = project.calculateDday()
+
+            if(favoriteList != null && favoriteList!!.contains(project.projectId)){
+                holder.binding.imageButton.setImageResource(R.drawable.heart_icon)
+            }
+
         }
         Picasso.get()
             .load(project.thumbnail)
