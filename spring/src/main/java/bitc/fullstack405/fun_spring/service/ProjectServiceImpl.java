@@ -58,7 +58,7 @@ public class ProjectServiceImpl implements ProjectService {
 //            fileUtil.deleteFile(imgName);
 //        }
 
-        projectRepository.uploadFile(project);
+//        projectRepository.uploadFile(project);
         projectRepository.save(project);
 
     }
